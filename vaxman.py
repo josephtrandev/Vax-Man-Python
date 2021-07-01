@@ -202,7 +202,7 @@ class Ghost(Player):
         else:
           if turn < l:
             turn+=1
-          elif ghost == "Green_Virus":
+          elif ghost == "Virus4":
             turn = 2
           else:
             turn = 0
@@ -213,7 +213,7 @@ class Ghost(Player):
       except IndexError:
          return [0,0]
 
-Pink_Virus_directions = [
+Virus2_directions = [
 [0,-30,4],
 [15,0,9],
 [0,15,11],
@@ -234,7 +234,7 @@ Pink_Virus_directions = [
 [15,0,9]
 ]
 
-Red_Virus_directions = [
+Virus1_directions = [
 [0,-15,4],
 [15,0,9],
 [0,15,11],
@@ -265,7 +265,7 @@ Red_Virus_directions = [
 [15,0,5]
 ]
 
-Blue_Virus_directions = [
+Virus3_directions = [
 [30,0,2],
 [0,-15,4],
 [15,0,10],
@@ -299,7 +299,7 @@ Blue_Virus_directions = [
 [15,0,1],
 ]
 
-Green_Virus_directions = [
+Virus4_directions = [
 [-30,0,2],
 [0,-15,4],
 [15,0,5],
@@ -319,10 +319,10 @@ Green_Virus_directions = [
 [15,0,9],
 ]
 
-pl = len(Pink_Virus_directions)-1
-bl = len(Red_Virus_directions)-1
-il = len(Blue_Virus_directions)-1
-cl = len(Green_Virus_directions)-1
+pl = len(Virus2_directions)-1
+bl = len(Virus1_directions)-1
+il = len(Virus3_directions)-1
+cl = len(Virus4_directions)-1
 
 # Call this function so the Pygame library can initialize itself
 pygame.init()
@@ -335,7 +335,7 @@ screen = pygame.display.set_mode([606, 606])
 
 
 # Set the title of the window
-pygame.display.set_caption('Pacman')
+pygame.display.set_caption('Vax-Man')
 
 # Create a surface we can draw on
 background = pygame.Surface(screen.get_size())
@@ -367,7 +367,7 @@ def startGame():
 
   block_list = pygame.sprite.RenderPlain()
 
-  monsta_list = pygame.sprite.RenderPlain()
+  ghost_list = pygame.sprite.RenderPlain()
 
   pacman_collide = pygame.sprite.RenderPlain()
 
@@ -395,24 +395,24 @@ def startGame():
   pacman_collide.add(Pacman)
 
   # Blinky 
-  Red_Virus=Ghost( w, b_h, "images/Red_Virus.png" )
-  monsta_list.add(Red_Virus)
-  all_sprites_list.add(Red_Virus)
+  Virus1=Ghost( w, b_h, "images/Red_Virus.png" )
+  ghost_list.add(Virus1)
+  all_sprites_list.add(Virus1)
 
   # Pinky
-  Pink_Virus=Ghost( w, m_h, "images/Pink_Virus.png" )
-  monsta_list.add(Pink_Virus)
-  all_sprites_list.add(Pink_Virus)
+  Virus2=Ghost( w, m_h, "images/Red_Virus.png" )
+  ghost_list.add(Virus2)
+  all_sprites_list.add(Virus2)
    
   # Inky
-  Blue_Virus=Ghost( i_w, m_h, "images/Blue_Virus.png" )
-  monsta_list.add(Blue_Virus)
-  all_sprites_list.add(Blue_Virus)
+  Virus3=Ghost( i_w, m_h, "images/Red_Virus.png" )
+  ghost_list.add(Virus3)
+  all_sprites_list.add(Virus3)
    
   # Clyde
-  Green_Virus=Ghost( c_w, m_h, "images/Green_Virus.png" )
-  monsta_list.add(Green_Virus)
-  all_sprites_list.add(Green_Virus)
+  Virus4=Ghost( c_w, m_h, "images/Red_Virus.png" )
+  ghost_list.add(Virus4)
+  all_sprites_list.add(Virus4)
 
   # Draw the grid
   for row in range(19):
@@ -470,35 +470,35 @@ def startGame():
                   Pacman.changespeed(0,30)
               if event.key == pygame.K_DOWN:
                   Pacman.changespeed(0,-30)
-          
+                    
       # ALL EVENT PROCESSING SHOULD GO ABOVE THIS COMMENT
    
       # ALL GAME LOGIC SHOULD GO BELOW THIS COMMENT
       Pacman.update(wall_list,gate)
 
-      returned = Pink_Virus.changespeed(Pink_Virus_directions,False,p_turn,p_steps,pl)
+      returned = Virus2.changespeed(Virus2_directions,False,p_turn,p_steps,pl)
       p_turn = returned[0]
       p_steps = returned[1]
-      Pink_Virus.changespeed(Pink_Virus_directions,False,p_turn,p_steps,pl)
-      Pink_Virus.update(wall_list,False)
+      Virus2.changespeed(Virus2_directions,False,p_turn,p_steps,pl)
+      Virus2.update(wall_list,False)
 
-      returned = Red_Virus.changespeed(Red_Virus_directions,False,b_turn,b_steps,bl)
+      returned = Virus1.changespeed(Virus1_directions,False,b_turn,b_steps,bl)
       b_turn = returned[0]
       b_steps = returned[1]
-      Red_Virus.changespeed(Red_Virus_directions,False,b_turn,b_steps,bl)
-      Red_Virus.update(wall_list,False)
+      Virus1.changespeed(Virus1_directions,False,b_turn,b_steps,bl)
+      Virus1.update(wall_list,False)
 
-      returned = Blue_Virus.changespeed(Blue_Virus_directions,False,i_turn,i_steps,il)
+      returned = Virus3.changespeed(Virus3_directions,False,i_turn,i_steps,il)
       i_turn = returned[0]
       i_steps = returned[1]
-      Blue_Virus.changespeed(Blue_Virus_directions,False,i_turn,i_steps,il)
-      Blue_Virus.update(wall_list,False)
+      Virus3.changespeed(Virus3_directions,False,i_turn,i_steps,il)
+      Virus3.update(wall_list,False)
 
-      returned = Green_Virus.changespeed(Green_Virus_directions,"Green_Virus",c_turn,c_steps,cl)
+      returned = Virus4.changespeed(Virus4_directions,"Virus4",c_turn,c_steps,cl)
       c_turn = returned[0]
       c_steps = returned[1]
-      Green_Virus.changespeed(Green_Virus_directions,"Green_Virus",c_turn,c_steps,cl)
-      Green_Virus.update(wall_list,False)
+      Virus4.changespeed(Virus4_directions,"Virus4",c_turn,c_steps,cl)
+      Virus4.update(wall_list,False)
 
       # See if the Pacman block has collided with anything.
       blocks_hit_list = pygame.sprite.spritecollide(Pacman, block_list, True)
@@ -515,18 +515,19 @@ def startGame():
       wall_list.draw(screen)
       gate.draw(screen)
       all_sprites_list.draw(screen)
-      monsta_list.draw(screen)
+      ghost_list.draw(screen)
 
       text=font.render("Score: "+str(score)+"/"+str(bll), True, red)
       screen.blit(text, [10, 10])
 
       if score == bll:
-        doNext("Congratulations, you won!",145,all_sprites_list,block_list,monsta_list,pacman_collide,wall_list,gate)
+        doNext("Congratulations, you won!",145,all_sprites_list,block_list,ghost_list,pacman_collide,wall_list,gate)
 
-    #   monsta_hit_list = pygame.sprite.spritecollide(Pacman, monsta_list, False)
+      ghost_hit_list = pygame.sprite.spritecollide(Pacman, ghost_list, False)
 
-    #   if monsta_hit_list:
-    #     doNext("Game Over",235,all_sprites_list,block_list,monsta_list,pacman_collide,wall_list,gate)
+      if ghost_hit_list:
+        ghost_list.remove(Virus1)
+        all_sprites_list.remove(Virus1)
 
       # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
       
@@ -534,7 +535,7 @@ def startGame():
     
       clock.tick(10)
 
-def doNext(message,left,all_sprites_list,block_list,monsta_list,pacman_collide,wall_list,gate):
+def doNext(message,left,all_sprites_list,block_list,ghost_list,pacman_collide,wall_list,gate):
   while True:
       # ALL EVENT PROCESSING SHOULD GO BELOW THIS COMMENT
       for event in pygame.event.get():
@@ -546,7 +547,7 @@ def doNext(message,left,all_sprites_list,block_list,monsta_list,pacman_collide,w
           if event.key == pygame.K_RETURN:
             del all_sprites_list
             del block_list
-            del monsta_list
+            del ghost_list
             del pacman_collide
             del wall_list
             del gate
