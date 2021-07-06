@@ -334,7 +334,7 @@ screen = pygame.display.set_mode([606, 606])
 # added to this list. The list is managed by a class called 'RenderPlain.'
 
 ADDENEMY = pygame.USEREVENT + 1
-pygame.time.set_timer(ADDENEMY, 5000)
+pygame.time.set_timer(ADDENEMY, 30000)
 
 # Set the title of the window
 pygame.display.set_caption('Vax-Man')
@@ -536,9 +536,6 @@ def startGame():
 
       for hit in ghost_hit_list:
         print("Ghost hit")
-
-      if not ghost_list:
-        doNext("Congratulations, you got rid of the virus!",145,all_sprites_list,block_list,ghost_list,pacman_collide,wall_list,gate)
 
       # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
       
