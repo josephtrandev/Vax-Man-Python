@@ -15,3 +15,4 @@ Vax-Man is inspired by Pac-Man, using the same rules with a few exceptions:
 
 # Game Images:
 
+![Game Preview](/images/vaxman preview.png)
