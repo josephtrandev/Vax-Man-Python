@@ -183,11 +183,11 @@ class Player(pygame.sprite.Sprite):
                 #     self.rect.left=old_x
                 #     print('b')
 
-        if gate != False:
-          gate_hit = pygame.sprite.spritecollide(self, gate, False)
-          if gate_hit:
-            self.rect.left=old_x
-            self.rect.top=old_y
+        # if gate != False:
+        #   gate_hit = pygame.sprite.spritecollide(self, gate, False)
+        #   if gate_hit:
+        #     self.rect.left=old_x
+        #     self.rect.top=old_y
 
 #Inheritime Player klassist
 class Ghost(Player):
@@ -333,6 +333,8 @@ screen = pygame.display.set_mode([606, 606])
 # This is a list of 'sprites.' Each block in the program is
 # added to this list. The list is managed by a class called 'RenderPlain.'
 
+ADDENEMY = pygame.USEREVENT + 1
+pygame.time.set_timer(ADDENEMY, 5000)
 
 # Set the title of the window
 pygame.display.set_caption('Vax-Man')
@@ -470,6 +472,13 @@ def startGame():
                   Pacman.changespeed(0,30)
               if event.key == pygame.K_DOWN:
                   Pacman.changespeed(0,-30)
+
+          # Add a new enemy?
+          if event.type == ADDENEMY:
+              # Create the new enemy and add it to sprite groups
+              Virus3=Ghost( w, b_h, "images/Red_Virus.png" )
+              ghost_list.add(Virus3)
+              all_sprites_list.add(Virus3)
                     
       # ALL EVENT PROCESSING SHOULD GO ABOVE THIS COMMENT
    
@@ -523,11 +532,13 @@ def startGame():
       if score == bll:
         doNext("Congratulations, you won!",145,all_sprites_list,block_list,ghost_list,pacman_collide,wall_list,gate)
 
-      ghost_hit_list = pygame.sprite.spritecollide(Pacman, ghost_list, False)
+      ghost_hit_list = pygame.sprite.spritecollide(Pacman, ghost_list, True, pygame.sprite.collide_circle)
 
-      if ghost_hit_list:
-        ghost_list.remove(Virus1)
-        all_sprites_list.remove(Virus1)
+      for hit in ghost_hit_list:
+        print("Ghost hit")
+
+      if not ghost_list:
+        doNext("Congratulations, you got rid of the virus!",145,all_sprites_list,block_list,ghost_list,pacman_collide,wall_list,gate)
 
       # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
       
