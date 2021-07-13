@@ -1,4 +1,5 @@
 import pygame
+import random
   
 black = (0,0,0)
 white = (255,255,255)
@@ -334,7 +335,7 @@ screen = pygame.display.set_mode([606, 606])
 # added to this list. The list is managed by a class called 'RenderPlain.'
 
 ADDENEMY = pygame.USEREVENT + 1
-pygame.time.set_timer(ADDENEMY, 5000)
+pygame.time.set_timer(ADDENEMY, 30000)
 
 # Set the title of the window
 pygame.display.set_caption('Vax-Man')
@@ -476,11 +477,36 @@ def startGame():
           for i in range(len(ghost_list)):
             # Add a new enemy?
             if event.type == ADDENEMY:
+              randomEnemy = random.choice([1, 2, 3, 4])
+
+              if randomEnemy==1:
+                # Create the new enemy and add it to sprite groups
+                Virus1=Ghost( w, b_h, "images/Red_Virus.png" )
+                ghost_list.add(Virus1)
+                all_sprites_list.add(Virus1)
+                print("Ghost spawned")
+              
+              if randomEnemy==2:
+                # Create the new enemy and add it to sprite groups
+                Virus2=Ghost( w, b_h, "images/Red_Virus.png" )
+                ghost_list.add(Virus2)
+                all_sprites_list.add(Virus2)
+                print("Ghost spawned")
+
+              if randomEnemy==3:
                 # Create the new enemy and add it to sprite groups
                 Virus3=Ghost( w, b_h, "images/Red_Virus.png" )
                 ghost_list.add(Virus3)
                 all_sprites_list.add(Virus3)
                 print("Ghost spawned")
+
+              if randomEnemy==4:
+                # Create the new enemy and add it to sprite groups
+                Virus4=Ghost( c_w, b_h, "images/Red_Virus.png" )
+                ghost_list.add(Virus4)
+                all_sprites_list.add(Virus4)
+                print("Ghost spawned")
+
                     
       # ALL EVENT PROCESSING SHOULD GO ABOVE THIS COMMENT
    
