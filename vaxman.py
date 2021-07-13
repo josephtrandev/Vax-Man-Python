@@ -334,7 +334,7 @@ screen = pygame.display.set_mode([606, 606])
 # added to this list. The list is managed by a class called 'RenderPlain.'
 
 ADDENEMY = pygame.USEREVENT + 1
-pygame.time.set_timer(ADDENEMY, 30000)
+pygame.time.set_timer(ADDENEMY, 5000)
 
 # Set the title of the window
 pygame.display.set_caption('Vax-Man')
@@ -480,6 +480,7 @@ def startGame():
                 Virus3=Ghost( w, b_h, "images/Red_Virus.png" )
                 ghost_list.add(Virus3)
                 all_sprites_list.add(Virus3)
+                print("Ghost spawned")
                     
       # ALL EVENT PROCESSING SHOULD GO ABOVE THIS COMMENT
    
@@ -538,8 +539,8 @@ def startGame():
       for hit in ghost_hit_list:
         print("Ghost hit")
 
-      if len(ghost_list) == 128:
-        doNext("Game over, you lost!",145,all_sprites_list,block_list,ghost_list,pacman_collide,wall_list,gate)
+      if len(ghost_list) >= 128:
+        doNext("Game Over",235,all_sprites_list,block_list,ghost_list,pacman_collide,wall_list,gate)
 
       # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
       
