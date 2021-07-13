@@ -473,12 +473,13 @@ def startGame():
               if event.key == pygame.K_DOWN:
                   Pacman.changespeed(0,-30)
 
-          # Add a new enemy?
-          if event.type == ADDENEMY:
-              # Create the new enemy and add it to sprite groups
-              Virus3=Ghost( w, b_h, "images/Red_Virus.png" )
-              ghost_list.add(Virus3)
-              all_sprites_list.add(Virus3)
+          for i in range(len(ghost_list)):
+            # Add a new enemy?
+            if event.type == ADDENEMY:
+                # Create the new enemy and add it to sprite groups
+                Virus3=Ghost( w, b_h, "images/Red_Virus.png" )
+                ghost_list.add(Virus3)
+                all_sprites_list.add(Virus3)
                     
       # ALL EVENT PROCESSING SHOULD GO ABOVE THIS COMMENT
    
@@ -536,6 +537,9 @@ def startGame():
 
       for hit in ghost_hit_list:
         print("Ghost hit")
+
+      if len(ghost_list) == 128:
+        doNext("Game over, you lost!",145,all_sprites_list,block_list,ghost_list,pacman_collide,wall_list,gate)
 
       # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
       
