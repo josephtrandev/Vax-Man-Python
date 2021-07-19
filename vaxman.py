@@ -557,13 +557,16 @@ def startGame():
       text=font.render("Score: "+str(score)+"/"+str(bll), True, red)
       screen.blit(text, [10, 10])
 
+      textg=font.render("Viruses: "+str(len(ghost_list)), True, red)
+      screen.blit(textg, [450, 10])
+
       if score == bll:
         doNext("Congratulations, you won!",145,all_sprites_list,block_list,ghost_list,pacman_collide,wall_list,gate)
 
       ghost_hit_list = pygame.sprite.spritecollide(Pacman, ghost_list, True, pygame.sprite.collide_circle)
 
       for hit in ghost_hit_list:
-        print("Ghost hit")
+        print("Virus vaccinated")
 
       if len(ghost_list) >= 128:
         doNext("Game Over",235,all_sprites_list,block_list,ghost_list,pacman_collide,wall_list,gate)
